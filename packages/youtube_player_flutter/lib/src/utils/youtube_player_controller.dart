@@ -151,6 +151,7 @@ class YoutubePlayerValue {
 class YoutubePlayerController extends ValueNotifier<YoutubePlayerValue> {
   /// The video id with which the player initializes.
   final String initialVideoId;
+  final String? channelId;
 
   /// Composes all the flags required to control the player.
   final YoutubePlayerFlags flags;
@@ -158,6 +159,7 @@ class YoutubePlayerController extends ValueNotifier<YoutubePlayerValue> {
   /// Creates [YoutubePlayerController].
   YoutubePlayerController({
     required this.initialVideoId,
+    this.channelId,
     this.flags = const YoutubePlayerFlags(),
   }) : super(YoutubePlayerValue());
 
@@ -245,7 +247,7 @@ class YoutubePlayerController extends ValueNotifier<YoutubePlayerValue> {
   /// if the seconds parameter specifies a time outside of the currently buffered video data.
   /// Default allowSeekAhead = true
   void seekTo(Duration position, {bool allowSeekAhead = true}) {
-    _callMethod('seekTo(${position.inMilliseconds/1000},$allowSeekAhead)');
+    _callMethod('seekTo(${position.inMilliseconds / 1000},$allowSeekAhead)');
     play();
     updateValue(value.copyWith(position: position));
   }
